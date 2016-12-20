@@ -109,7 +109,7 @@ export class ClientsComponent implements OnInit {
     if(window.confirm("Are you sure you want to permanently delete this item?")) {
       this._clientService.remove(client).subscribe(
         res => {
-          var pos = this.clients.map(client => { return client._id }).indexOf(client._id);
+          var pos = this.clients.map(client => { return client.id }).indexOf(client.id);
           this.clients.splice(pos, 1);
           this.sendInfoMsg("item deleted successfully.", "success");
         },

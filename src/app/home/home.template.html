@@ -2,3 +2,31 @@
 
 <p-schedule [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
             (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
+
+
+<p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="vin">Title</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="event.title" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="start">Start</label></div>
+            <div class="ui-grid-col-8"><p-inputMask id="start" mask="9999-99-99" [(ngModel)]="event.start" placeholder="99/99/9999" slotChar="yyyy-mm-dd"></p-inputMask></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="end">End</label></div>
+            <div class="ui-grid-col-8"><p-inputMask id="end" mask="9999-99-99" [(ngModel)]="event.end" placeholder="Optional" slotChar="yyyy-mm-dd"></p-inputMask></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="allday">All Day</label></div>
+            <div class="ui-grid-col-8"><p-checkbox [(ngModel)]="event.allDay" binary="binary"></p-checkbox></div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" icon="fa-close" (click)="deleteEvent()" label="Delete"></button>
+            <button type="button" icon="fa-check" (click)="saveEvent()" label="Save"></button>
+        </div>
+    </footer>
+</p-dialog>

@@ -24,7 +24,6 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
 
-import { CarService } from './service/carservice';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { CarService } from './service/carservice';
     ToolbarModule
   ],
   providers: [
-    CarService,
     ClientService,
     VisitService,
     AuthGuard,

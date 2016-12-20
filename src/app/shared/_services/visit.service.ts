@@ -19,6 +19,13 @@ export class VisitService{
                     .catch(this.handleError);
   }
 
+  getAllVisits (): Observable<Visit[]> {
+    return this.http.get('http://localhost:4040/apiv1/visits', this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+
   add (clientId, visit: Visit): Observable<Visit> {
     let body = JSON.stringify(visit);
     return this.http.post(this.url + clientId + '/comments', body, this.options)
@@ -29,13 +36,13 @@ export class VisitService{
 
   update(clientId, visit: Visit) {
     let body = JSON.stringify(visit);
-    return this.http.put(this.url + clientId + '/comments/' + visit._id, body, this.options)
+    return this.http.put(this.url + clientId + '/comments/' + visit.id, body, this.options)
                     .map((res: Response) => res.json())
                     .catch(this.handleError);
   }
 
   remove(clientId, visit: Visit)  {
-    return this.http.delete(this.url + clientId + '/comments/' + visit._id, this.options)
+    return this.http.delete(this.url + clientId + '/comments/' + visit.id, this.options)
                     .catch(this.handleError);
   }
 

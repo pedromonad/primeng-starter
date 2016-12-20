@@ -81,7 +81,7 @@ export class VisitComponent implements OnInit {
     if(window.confirm("Are you sure you want to permanently delete this item?")) {
       this._visitService.remove(this.clientId, visit).subscribe(
         res => {
-          var pos = this.histories.map(visit => { return visit._id }).indexOf(visit._id);
+          var pos = this.histories.map(visit => { return visit.id }).indexOf(visit.id);
           this.histories.splice(pos, 1);
           this.sendInfoMsg("item deleted successfully.", "success");
         },
