@@ -1,0 +1,239 @@
+<div class="card">
+  <h4 class="card-header">Adicionar cliente</h4>
+  <div class="card-block">
+        
+        <div class="container">
+            <form [formGroup]="addClientForm" (ngSubmit)="addClient()" >
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input class="form-control" placeholder="Nome" name="name" formControlName="name" type="text" />          
+                   </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome</label>
+                        <input class="form-control" placeholder="Sobrenome" name="lastName" formControlName="lastName"  type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="rg">RG</label>
+                        <input class="form-control" placeholder="RG" name="rg" type="text"  formControlName="rg" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input class="form-control" placeholder="CPF" name="cpf" type="text"  formControlName="cpf" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maritalStatus"> Estado Civil </label>
+                        <br />
+                        <label class="custom-control custom-radio">
+                            <input  class="custom-control-input" name="maritalStatus" type="radio" formControlName="maritalStatus" value="Solteiro" />
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Solteiro(a)</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input  class="custom-control-input" name="maritalStatus" type="radio" formControlName="maritalStatus" value="Casado" />                          
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Casado(a)</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input  class="custom-control-input" name="maritalStatus" type="radio" formControlName="maritalStatus" value="Outro" />                          
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Outro</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex"> Sexo </label>
+                        <br />
+                        <label class="custom-control custom-radio">
+                            <input  class="custom-control-input" name="sex" type="radio" formControlName="sex" value="M" />
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Masculino</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input  class="custom-control-input" name="sex" type="radio" formControlName="sex" value="F" />                          
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Feminino</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input class="form-control" placeholder="Cidade" name="city" type="text" formControlName="city" /> 
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Endereço</label>
+                        <input class="form-control" placeholder="Endereço" name="address" type="text" formControlName="address" />
+                    </div>
+                    <div class="form-group">
+                        <label for="state">Estado</label>
+                        <input class="form-control" placeholder="Estado" name="state" type="text" formControlName="state" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone/Celular</label>
+                        <input class="form-control" placeholder="Telefone/Celular" name="phone" type="text" formControlName="phone" /> 
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook">Facebook</label>
+                        <input class="form-control" placeholder="Facebook" name="facebook" type="text" formControlName="facebook" /> 
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input class="form-control" placeholder="E-mail" name="email" type="text" formControlName="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">Data de Nascimento</label>
+                        <input class="form-control" placeholder="Data de Nascimento" name="birthday" formControlName="birthday" type="date" />  
+                    </div>
+                    <div class="form-group">
+                        <label for="info">Observações</label>
+                        <textarea class="form-control" name="info" formControlName="info"></textarea>          
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="submit" [disabled]="!addClientForm.valid" class="btn">OK</button>
+                    </div>
+            </form>
+        </div>
+     </div>
+</div>
+
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Clientes ({{clients.length}})</h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>RG</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="clients.length === 0">
+        <tr>
+          <td colspan="4">There are no clients in the DB. Add a new client below.</td>
+        </tr>  
+      </tbody>
+      <tbody *ngIf="!isEditing">
+        <tr *ngFor="let client of clients">
+          <td>{{client.name}}</td>
+          <td>{{client.lastName}}</td>
+          <td>{{client.rg}}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="enableEditing(client)">
+                <i class="fa fa-pencil"></i> Editar
+            </button> 
+            <button class="btn btn-sm btn-danger" (click)="deleteClient(client)">
+                <i class="fa fa-trash"></i> Deletar
+            </button>
+            <button class="btn btn-sm btn-success" [routerLink]="['/visitas', {clientId: client._id}]" >
+                <i class="fa fa-info"></i> Adicionar Visita
+            </button>
+          </td>
+        </tr>  
+      </tbody>
+      <tbody *ngIf="isEditing">
+        <tr>
+          <td colspan="4">
+            <form #form="ngForm" (ngSubmit)="editClient(client)">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="Name" [(ngModel)]="client.name" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="lastName" placeholder="lastName" [(ngModel)]="client.lastName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rg">RG</label>
+                    <input class="form-control" placeholder="RG" name="rg" type="text" [(ngModel)]="client.cpf" />
+                </div>
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input class="form-control" placeholder="CPF" name="cpf" type="text" [(ngModel)]="client.cpf" />
+                </div>
+
+                <div class="form-group">
+                    <label for="maritalStatus"> Estado Civil </label>
+                    <br />
+                    <label class="custom-control custom-radio">
+                        <input  class="custom-control-input" name="maritalStatus" type="radio" value="Solteiro" [(ngModel)]="client.maritalStatus" />
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Solteiro(a)</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input  class="custom-control-input" name="maritalStatus" type="radio" value="Casado" [(ngModel)]="client.maritalStatus" />                          
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Casado(a)</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input  class="custom-control-input" name="maritalStatus" type="radio" value="Outro" [(ngModel)]="client.maritalStatus" />                          
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Outro</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="sex"> Sexo </label>
+                    <br />
+                    <label class="custom-control custom-radio">
+                        <input  class="custom-control-input" name="sex" type="radio" value="M" [(ngModel)]="client.sex" />
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Masculino</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input  class="custom-control-input" name="sex" type="radio" value="F" [(ngModel)]="client.sex" />                          
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Feminino</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input class="form-control" placeholder="Cidade" name="city" type="text" [(ngModel)]="client.city" /> 
+                </div>
+                <div class="form-group">
+                    <label for="address">Endereço</label>
+                    <input class="form-control" placeholder="Endereço" name="address" type="text" [(ngModel)]="client.address" />
+                </div>
+                <div class="form-group">
+                    <label for="state">Estado</label>
+                    <input class="form-control" placeholder="Estado" name="state" type="text" [(ngModel)]="client.state" />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone/Celular</label>
+                    <input class="form-control" placeholder="Telefone/Celular" name="phone" type="text" [(ngModel)]="client.phone" /> 
+                </div>
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <input class="form-control" placeholder="Facebook" name="facebook" type="text" [(ngModel)]="client.facebook" /> 
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input class="form-control" placeholder="E-mail" name="email" type="text" [(ngModel)]="client.email" />
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Data de Nascimento</label>
+                    <input class="form-control" placeholder="Data de Nascimento" name="birthday" type="date" [(ngModel)]="client.birthday" />  
+                </div>
+                <div class="form-group">
+                    <label for="info">Observações</label>
+                    <textarea class="form-control" name="info" [(ngModel)]="client.info" ></textarea>          
+                </div>
+                    
+                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid">
+                    <i class="fa fa-floppy-o"></i> Salvar
+                </button>
+               
+            </form>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancelar</button>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div [hidden]="!infoMsg.body" class="alert alert-{{infoMsg.type}} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Mensagem:</strong> {{infoMsg.body}}
+    </div>
+  </div>
+</div>

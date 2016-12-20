@@ -5,3 +5,11 @@
 .data-container {
     padding: 50px;
 }
+
+.active{
+    color: #fff;
+}
+
+.navbar-brand {
+    float:right;
+}
