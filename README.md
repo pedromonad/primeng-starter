@@ -1,1 +1,1 @@
-# primeng-starter
+# PrimeNg Starter
