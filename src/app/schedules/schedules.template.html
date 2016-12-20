@@ -1,0 +1,63 @@
+<div class="card">  
+    
+    <h4 class="card-header">Adicionar horário</h4>
+
+      <div class="card-block">
+        <form [formGroup]="addScheduleForm" (ngSubmit)="addSchedule(schedule)">
+            <div class="form-group">
+                <label for="info">Descrição</label>
+                <textarea class="form-control" name="title" formControlName="title" ></textarea>          
+            </div>
+
+            <div class="form-group">
+              <label for="birthday">Data início:</label>
+              <input class="form-control" placeholder="Data início" name="start" type="date" />  
+            </div>
+
+            <div class="form-group">
+              <label for="birthday">Data fim:</label>
+              <input class="form-control" placeholder="Data fim" name="end" type="date" />  
+            </div>
+                
+            <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addScheduleForm.valid" >
+                <i class="fa fa-floppy-o"></i> Salvar
+            </button>
+        </form>
+      </div>
+ </div>  
+
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Horários ({{histories.length}})</h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="schedules.length === 0">
+        <tr>
+          <td colspan="4">Não há scheduleas desse cliente.</td>
+        </tr>  
+      </tbody>
+      <tbody>
+        <tr *ngFor="let schedule of schedules">
+          <td>{{schedule.description}}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteSchedule(schedule)">
+                <i class="fa fa-trash"></i> Delete
+            </button>
+          </td>
+        </tr>  
+      </tbody>
+    </table>
+    <div [hidden]="!infoMsg.body" class="alert alert-{{infoMsg.type}} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Mensagem:</strong> {{infoMsg.body}}
+    </div>
+  </div>
+</div>

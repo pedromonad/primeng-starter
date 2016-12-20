@@ -8,9 +8,9 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { ClientsModule } from './clients/clients.module';
-import { VisitModule } from './visit/visit.module';
+import { SchedulesModule } from './schedules/schedules.module';
 import { ClientService } from './shared/_services/client.service';
-import { VisitService } from './shared/_services/visit.service';
+import { ScheduleService } from './shared/_services/schedule.service';
 import { AuthGuard } from './shared/_guards/auth.guard';
 import { AuthenticationService } from './shared/_services/authentication.service';
 
@@ -36,7 +36,7 @@ import { ScheduleModule } from 'primeng/primeng';
     ]),
     HomeModule,
     ClientsModule,
-    VisitModule,
+    SchedulesModule,
     LoginModule,
 
     BrowserModule,
@@ -55,7 +55,7 @@ import { ScheduleModule } from 'primeng/primeng';
   ],
   providers: [
     ClientService,
-    VisitService,
+    ScheduleService,
     AuthGuard,
     AuthenticationService
   ]

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Visit } from '../_models/visit';
+import { Schedule } from '../_models/schedule';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class VisitService{
+export class ScheduleService{
   private url = 'http://localhost:4040/apiv1/clients/';
   private token = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token;
   private headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.token,  'Access-Control-Allow-Origin': '*' });
@@ -13,36 +13,36 @@ export class VisitService{
   constructor(private http: Http) {
   }
 
-  getVisitsByClient (clientId): Observable<Visit[]> {
-    return this.http.get(this.url + clientId + '/comments', this.options)
+  getSchedulesByClient (clientId): Observable<Schedule[]> {
+    return this.http.get(this.url + clientId + '/schedules', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  getAllVisits (): Observable<Visit[]> {
-    return this.http.get('http://localhost:4040/apiv1/visits', this.options)
+  getAllSchedules (): Observable<Schedule[]> {
+    return this.http.get('http://localhost:4040/apiv1/schedules', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
 
-  add (clientId, visit: Visit): Observable<Visit> {
-    let body = JSON.stringify(visit);
-    return this.http.post(this.url + clientId + '/comments', body, this.options)
+  add (clientId, schedule: Schedule): Observable<Schedule> {
+    let body = JSON.stringify(schedule);
+    return this.http.post(this.url + clientId + '/schedules', body, this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
                     
   }
 
-  update(clientId, visit: Visit) {
-    let body = JSON.stringify(visit);
-    return this.http.put(this.url + clientId + '/comments/' + visit.id, body, this.options)
+  update(clientId, schedule: Schedule) {
+    let body = JSON.stringify(schedule);
+    return this.http.put(this.url + clientId + '/schedules/' + schedule.id, body, this.options)
                     .map((res: Response) => res.json())
                     .catch(this.handleError);
   }
 
-  remove(clientId, visit: Visit)  {
-    return this.http.delete(this.url + clientId + '/comments/' + visit.id, this.options)
+  remove(clientId, schedule: Schedule)  {
+    return this.http.delete(this.url + clientId + '/schedules/' + schedule.id, this.options)
                     .catch(this.handleError);
   }
 

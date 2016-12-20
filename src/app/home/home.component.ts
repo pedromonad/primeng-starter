@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OnInit, ChangeDetectorRef } from '@angular/core';
 import { Dialog } from 'primeng/primeng';
 
-import { VisitService } from '../shared/_services/visit.service';
+import { ScheduleService } from '../shared/_services/schedule.service';
 
 @Component({
   selector: 'home',
@@ -22,7 +22,7 @@ export class HomeComponent {
     display: boolean = false;
     
     constructor(public route: ActivatedRoute, 
-    private _visitService: VisitService,
+    private _scheduleService: ScheduleService,
     private cd: ChangeDetectorRef) { }
 
 
@@ -95,7 +95,7 @@ export class HomeComponent {
             }
         ];
     
-        this.getVisits();
+        //this.getSchedules();
         this.header = {
             left: 'prev,next today',
             center: 'title',
@@ -103,8 +103,8 @@ export class HomeComponent {
         };
     }
 
-    getVisits() {
-        this._visitService.getAllVisits().subscribe(
+    getSchedules() {
+        this._scheduleService.getAllSchedules().subscribe(
             data => this.events = data,
             error => console.log(error)
         );
