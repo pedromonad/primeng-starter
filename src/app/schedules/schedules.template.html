@@ -11,12 +11,12 @@
 
             <div class="form-group">
               <label for="birthday">Data início:</label>
-              <input class="form-control" placeholder="Data início" name="start" type="date" />  
+              <input class="form-control" placeholder="Data início" name="start" type="date" formControlName="start" />  
             </div>
 
             <div class="form-group">
               <label for="birthday">Data fim:</label>
-              <input class="form-control" placeholder="Data fim" name="end" type="date" />  
+              <input class="form-control" placeholder="Data fim" name="end" type="date" formControlName="end" />  
             </div>
                 
             <button class="btn btn-sm btn-primary" type="submit" [disabled]="!addScheduleForm.valid" >
@@ -28,26 +28,30 @@
 
 
 <div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Horários ({{histories.length}})</h4>
+  <h4 class="card-header">Horários ({{schedules.length}})</h4>
   <div class="card-block">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
           <th>Descrição</th>
+          <th>Início</th>
+          <th>Fim</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody *ngIf="schedules.length === 0">
         <tr>
-          <td colspan="4">Não há scheduleas desse cliente.</td>
+          <td colspan="4">Não há horários agendados para esse cliente.</td>
         </tr>  
       </tbody>
       <tbody>
         <tr *ngFor="let schedule of schedules">
-          <td>{{schedule.description}}</td>
-          <td>
+          <td>{{ schedule.title }}</td>
+          <td>{{ schedule.start | date: 'dd/MM/yyyy @ h:mma' }}</td>
+          <td>{{ schedule.end   | date: 'dd/MM/yyyy @ h:mma' }}</td>
+          <td align="center">
             <button class="btn btn-sm btn-danger" (click)="deleteSchedule(schedule)">
-                <i class="fa fa-trash"></i> Delete
+                <i class="fa fa-trash"></i>
             </button>
           </td>
         </tr>  

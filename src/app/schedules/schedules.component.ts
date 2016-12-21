@@ -21,8 +21,8 @@ export class SchedulesComponent implements OnInit {
 
   private addScheduleForm: FormGroup;
   private title = new FormControl("", Validators.required);
-  private start = new FormControl("", Validators.required);
-  private end = new FormControl("", Validators.required);
+  private start = new FormControl;
+  private end = new FormControl;
   
   private infoMsg = { body: "", type: "info"};
 
@@ -35,7 +35,6 @@ export class SchedulesComponent implements OnInit {
     this._routeParams.params.subscribe(params => {
         this.clientId = params['clientId'];
         this.getSchedule();
-        console.log(this.clientId);
     });
 
     
@@ -59,7 +58,7 @@ export class SchedulesComponent implements OnInit {
     
     this._scheduleService.add(this.clientId, this.addScheduleForm.value).subscribe(
       res => {
-        var newSchedule = res;
+        let newSchedule = res;
         this.schedules.push(newSchedule);
         this.addScheduleForm.reset();
         this.sendInfoMsg("item added successfully.", "success");
