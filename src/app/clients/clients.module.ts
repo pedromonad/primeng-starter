@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-
-import { SharedModule } from '../shared/shared.module';
 import { ClientsComponent } from './clients.component';
 import { ClientsRoutingModule } from './clients-routing.module';
+import { CommonModule } from '../common/common.module';
 
 @NgModule({
   imports: [
-    SharedModule,
-    ClientsRoutingModule
+    ClientsRoutingModule,
+    CommonModule
   ],
   declarations: [
     ClientsComponent

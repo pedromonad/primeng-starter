@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-
-import { SharedModule } from '../shared/shared.module';
 import { SchedulesComponent } from './schedules.component';
 import { SchedulesRoutingModule } from './schedules-routing.module';
+import { CommonModule } from '../common/common.module';
 
 @NgModule({
   imports: [
-    SharedModule,
-    SchedulesRoutingModule
+    SchedulesRoutingModule,
+    CommonModule
   ],
   declarations: [
     SchedulesComponent

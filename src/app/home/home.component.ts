@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { OnInit, ChangeDetectorRef } from '@angular/core';
 import { Dialog } from 'primeng/primeng';
 
-import { ScheduleService } from '../shared/_services/schedule.service';
+import { ScheduleService } from '../common/_services/schedule.service';
+
 
 @Component({
   selector: 'home',
@@ -29,7 +30,8 @@ export class HomeComponent {
         this.header = {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'month,agendaWeek,agendaDay',
+            locate: 'pt-br'
         };
     }
 

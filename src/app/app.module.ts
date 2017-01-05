@@ -1,29 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { CommonModule } from './common/common.module';
 import { HomeModule } from './home/home.module';
+import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { ClientsModule } from './clients/clients.module';
 import { SchedulesModule } from './schedules/schedules.module';
-import { ClientService } from './shared/_services/client.service';
-import { ScheduleService } from './shared/_services/schedule.service';
-import { AuthGuard } from './shared/_guards/auth.guard';
-import { AuthenticationService } from './shared/_services/authentication.service';
-
-
-import { ToolbarModule } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
-import { InputTextModule } from 'primeng/primeng';
-import { PasswordModule } from 'primeng/primeng';
-import { ButtonModule } from 'primeng/primeng';
-import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { DialogModule } from 'primeng/primeng';
-import { ScheduleModule } from 'primeng/primeng';
-
 
 @NgModule({
   declarations: [
@@ -31,33 +14,14 @@ import { ScheduleModule } from 'primeng/primeng';
   ],
   bootstrap: [AppComponent],
   imports: [
-    RouterModule.forRoot([
-      { path: '', redirectTo: '/home', pathMatch: 'full' }
-    ]),
+    CommonModule,
+    AppRoutingModule,
     HomeModule,
     ClientsModule,
     SchedulesModule,
-    LoginModule,
-
-    BrowserModule,
-    FormsModule,
-    ScheduleModule,
-    HttpModule,
-    ButtonModule,
-    MessagesModule,
-    InputTextModule,
-    PasswordModule,
-    ReactiveFormsModule,
-    DataTableModule,
-    SharedModule,
-    DialogModule,
-    ToolbarModule
+    LoginModule
   ],
   providers: [
-    ClientService,
-    ScheduleService,
-    AuthGuard,
-    AuthenticationService
   ]
 })
 export class AppModule { }

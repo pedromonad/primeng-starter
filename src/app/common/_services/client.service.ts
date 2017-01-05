@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class ClientService{
   private url = 'http://localhost:4040/apiv1/clients/';
   private token = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token;
-  private headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.token,  'Access-Control-Allow-Origin': '*' });
+  private headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.token});
   private options = new RequestOptions({ headers: this.headers });
 
   constructor(private http: Http) {

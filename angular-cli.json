@@ -21,13 +21,17 @@
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
-        "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/css/tether.min.css",
-        "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/fullcalendar/dist/fullcalendar.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/fullcalendar/dist/lang/pt-br.js",
+        "../node_modules/fullcalendar/dist/fullcalendar.min.js",
+        "../node_modules/tether/dist/js/tether.min.js",
+        "../node_modules/moment/min/moment.min.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

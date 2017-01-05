@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 
-import { ScheduleService } from '../shared/_services/schedule.service';
+import { ScheduleService } from '../common/_services/schedule.service';
 
 @Component({
   selector: 'app-schedules',

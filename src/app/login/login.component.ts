@@ -1,11 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../shared/_services/authentication.service';
+import { AuthenticationService } from '../common/_services/authentication.service';
 
 @Component({
-    //moduleId: module.id,
-    templateUrl: 'login.component.html'
+    templateUrl: './login.component.html'
 })
 
 export class LoginComponent implements OnInit {

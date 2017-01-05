@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 
-import { ClientService } from '../shared/_services/client.service';
+import { ClientService } from '../common/_services/client.service';
 
 @Component({
   selector: 'app-clients',
